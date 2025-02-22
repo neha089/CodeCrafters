@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./Home.css";
+import axios from "axios";
+import "./Home.css"; // Ensure this file contains necessary styles
+
 
 const Home = () => {
   const [user, setUser] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Check localStorage for user info on component mount
- useEffect(() => {
-  const storedUser = localStorage.getItem("user");
-  if (storedUser) {
-    setUser(JSON.parse(storedUser)); // Parse the JSON string into an object
-  }
-}, []);
+  // Fetch user from localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
+  // Fetch featured products from backend
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/products/");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <div>
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <Link className="navbar-brand" to="/">3D Clothing</Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
+          <Link className="navbar-brand" to="/">ShopEase</Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
@@ -33,10 +46,13 @@ const Home = () => {
               <li className="nav-item">
                 <Link className="nav-link" to="/products">Products</Link>
               </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" to="/my-orders">Orders</Link>
+              </li>
               {user ? (
                 <li className="nav-item">
-                  {/* Display the user's name instead of "Profile" */}
-                  <Link className="nav-link" to="/profile">profile</Link>
+                  <Link className="nav-link" to="/profile">Profile</Link>
                 </li>
               ) : (
                 <li className="nav-item">
@@ -49,51 +65,40 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <header className="hero-section">
-        <div className="container text-center">
-          <h1>Try Clothes in 3D Before Buying!</h1>
-          <p>Experience Virtual Fitting with AI-powered Visualization</p>
-          <Link to="/products" className="btn btn-primary">Explore Now</Link>
+      <header className="hero-section text-center">
+        <div className="container">
+          <h1 className="display-4 fw-bold">Try Clothes in 3D Before Buying!</h1>
+          <p className="lead">Experience Virtual Fitting with AI-powered Visualization</p>
+          <Link to="/products" className="btn btn-primary btn-lg mt-3">Explore Now</Link>
         </div>
       </header>
+      
 
       {/* Featured Products Section */}
       <section className="featured-products container mt-5">
-        <h2 className="text-center">Featured Products</h2>
-        <div className="row">
-          <div className="col-md-4">
-            <div className="card">
-              <img src="https://via.placeholder.com/300" className="card-img-top" alt="Product 1" />
-              <div className="card-body">
-                <h5 className="card-title">Stylish Jacket</h5>
-                <p className="card-text">Experience 3D Try-On.</p>
-                <Link to="/products" className="btn btn-dark">View More</Link>
-              </div>
-            </div>
+        <h2 className="text-center mb-4">Featured Products</h2>
+        {loading ? (
+          <div className="text-center">
+            <div className="spinner-border text-primary" role="status"></div>
+            <p>Loading products...</p>
           </div>
-
-          <div className="col-md-4">
-            <div className="card">
-              <img src="https://via.placeholder.com/300" className="card-img-top" alt="Product 2" />
-              <div className="card-body">
-                <h5 className="card-title">Casual T-Shirt</h5>
-                <p className="card-text">Best quality fabric.</p>
-                <Link to="/products" className="btn btn-dark">View More</Link>
+        ) : (
+          <div className="row">
+            {products.map((product) => (
+              <div className="col-md-4" key={product._id}>
+                <div className="card product-card">
+                  <img src={product.img} className="card-img-top" alt={product.name} />
+                  <div className="card-body text-center">
+                    <h5 className="card-title">{product.name}</h5>
+                    <p className="card-text text-muted">{product.description}</p>
+                    <h6 className="fw-bold text-primary">${product.price}</h6>
+                    <Link to={`/products/${product._id}`} className="btn btn-dark">View More</Link>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-
-          <div className="col-md-4">
-            <div className="card">
-              <img src="https://via.placeholder.com/300" className="card-img-top" alt="Product 3" />
-              <div className="card-body">
-                <h5 className="card-title">Trendy Jeans</h5>
-                <p className="card-text">Perfect fit for you.</p>
-                <Link to="/products" className="btn btn-dark">View More</Link>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </section>
 
       {/* Footer */}

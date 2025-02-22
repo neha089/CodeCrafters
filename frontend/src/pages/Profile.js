@@ -62,8 +62,13 @@ const Profile = () => {
         </div>
 
         <div className="text-center mt-4">
-          <Link to="/edit-profile" className="btn btn-primary">
-            Edit Profile
+          <Link to="/Login" className="btn btn-primary">
+            Logout
+          </Link>
+          <br/>
+          <br/>
+          <Link to="/" className="btn btn-primary">
+            Back to Home
           </Link>
         </div>
       </div>

@@ -33,14 +33,22 @@ router.post("/", async (req, res) => {
     res.status(500).json({ message: "Failed to create product", error: error.message });
   }
 });
+ // Ensure correct model import
 
-router.get("/:id", (req, res) => {
-  const product = products.find(p => p._id === parseInt(req.params._id));
-  if (!product) {
-    return res.status(404).json({ error: "Product not found" });
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id); // Fetch from DB
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  res.json(product);
 });
+
+
+
 
 
 module.exports = router;

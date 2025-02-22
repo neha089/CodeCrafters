@@ -1,0 +1,120 @@
+/* MyOrders.css */
+
+/* General Page Styling */
+.my-orders-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  /* Page Title */
+  .my-orders-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Order Card */
+  .order-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .order-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Order Header */
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 10px;
+  }
+  
+  /* Order Details */
+  .order-details {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  /* Status Badge */
+  .order-status {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    text-transform: capitalize;
+  }
+  
+  /* Status Colors */
+  .status-pending {
+    background: #ffcc00;
+    color: #333;
+  }
+  
+  .status-processing {
+    background: #17a2b8;
+    color: white;
+  }
+  
+  .status-shipped {
+    background: #007bff;
+    color: white;
+  }
+  
+  .status-delivered {
+    background: #28a745;
+    color: white;
+  }
+  
+  .status-cancelled {
+    background: #dc3545;
+    color: white;
+  }
+  
+  /* Product List */
+  .product-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .product-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-list li:last-child {
+    border-bottom: none;
+  }
+  
+  /* View Details Button */
+  .view-details-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .view-details-btn:hover {
+    background: #0056b3;
+  }
+  

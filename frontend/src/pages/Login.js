@@ -57,6 +57,10 @@ const Login = () => {
         });
         // Store token or user data (here we store the token in localStorage)
         localStorage.setItem("user", JSON.stringify(response.data));
+
+        
+   
+    
         // Redirect to profile or home page
         navigate("/");
       } catch (err) {
