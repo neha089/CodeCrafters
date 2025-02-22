@@ -1,0 +1,38 @@
+/* Cart.css */
+
+.cart-items {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .cart-item {
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .cart-item-img {
+    width: 80px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .cart-item-details {
+    flex-grow: 1;
+    margin-left: 15px;
+  }
+  
+  .cart-quantity {
+    width: 60px;
+    text-align: center;
+  }
+  
+  .cart-summary {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #343a40;
+    color: white;
+    border-radius: 10px;
+  }
+  

@@ -1,0 +1,31 @@
+.hero-section {
+    background: url("https://via.placeholder.com/1500x600") no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+  }
+  
+  .hero-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .hero-section p {
+    font-size: 1.2rem;
+  }
+  
+  .featured-products .card {
+    transition: 0.3s;
+  }
+  
+  .featured-products .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .footer {
+    margin-top: 20px;
+  }
+  

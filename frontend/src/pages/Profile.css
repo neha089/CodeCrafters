@@ -1,0 +1,19 @@
+.profile-container {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .profile-img {
+    width: 120px;
+    height: 120px;
+    border: 3px solid #007bff;
+  }
+  
+  .card {
+    border-radius: 10px;
+  }
+  
+  .list-group-item {
+    background-color: #f8f9fa;
+  }
+  
