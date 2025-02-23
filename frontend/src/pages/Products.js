@@ -157,10 +157,12 @@
 // export default Products;
 
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // For navigation
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { FaSearch, FaImage, FaMicrophone } from "react-icons/fa";
 import "./Products.css";
+import { jwtDecode } from "jwt-decode";
 
 const Products = () => {
   // State for text search
@@ -181,6 +183,9 @@ const Products = () => {
   
   // Authentication state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+
 
   // Check if user is logged in
   useEffect(() => {
@@ -230,8 +235,7 @@ const Products = () => {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       console.log("Image search response:", response.data);
-      // Update products with results from image search
-      if(response.data.products){
+      if (response.data.products) {
         setProducts(response.data.products);
       } else {
         setImageError("No products returned from image search.");
@@ -263,7 +267,6 @@ const Products = () => {
     recognition.onresult = (event) => {
       const voiceText = event.results[0][0].transcript;
       setTranscript(voiceText);
-      // Update text search field with transcript and trigger voice search
       setSearchQuery(voiceText);
       performVoiceSearch(voiceText);
       setListening(false);
@@ -287,8 +290,7 @@ const Products = () => {
         params: { query: queryText },
       });
       console.log("Voice search response:", response.data);
-      // Update products with voice search results
-      if(response.data.products){
+      if (response.data.products) {
         setProducts(response.data.products);
       } else {
         setVoiceError("No products returned from voice search.");
@@ -300,6 +302,32 @@ const Products = () => {
       setVoiceLoading(false);
     }
   };
+
+  // Function to log "viewed" action and navigate to product details
+  const handleViewDetails = async (productId) => {
+    try {
+      const user = localStorage.getItem("user");
+
+      // Ensure user token exists and is valid
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
+      const decodedToken = jwtDecode(user);
+      const user_id = decodedToken.id;
+      console.log(productId);
+      console.log(user_id);
+      
+      await axios.post("http://localhost:5000/api/interactions", {
+        user_id,
+        product_id: productId,
+        action_type: "viewed",
+      });
+    } catch (error) {
+      console.error("Error logging viewed action:", error);
+    }
+    navigate(`/products/${productId}`);
+  };
+
 
   return (
     <div>
@@ -380,9 +408,12 @@ const Products = () => {
                   <div className="card-body text-center">
                     <h5 className="card-title">{product.title}</h5>
                     <p className="card-text">{product.price}</p>
-                    <Link to={`/products/${product._id}`} className="btn btn-dark">
+                    <button
+                      className="btn btn-dark"
+                      onClick={() => handleViewDetails(product._id)}
+                    >
                       View Details
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -402,4 +433,5 @@ const Products = () => {
 };
 
 export default Products;
+
 
