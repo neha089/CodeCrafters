@@ -130,8 +130,9 @@ const Checkout = () => {
 
       if (response.status === 201) {
         alert("Order placed successfully!");
-        localStorage.removeItem("cart"); 
-        localStorage.removeItem("checkoutForm"); 
+        localStorage.removeItem("cart");
+        localStorage.removeItem("checkoutForm");
+        setCart([]); // Clear cart in state
         navigate("/order-confirmation");
       }
     } catch (error) {
@@ -151,11 +152,20 @@ const Checkout = () => {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ms-auto">
                   <li className="nav-item"><Link className="nav-link" to="/products">Products</Link></li>
-                  {isLoggedIn ? (
-                    <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>
-                  ) : (
-                    <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
-                  )}
+                 {isLoggedIn ? (
+                                 <ul className="navbar-nav ms-auto">
+                                 <li className="nav-item">
+                                 <Link className="nav-link" to="/carts">Cart</Link>
+                                 </li>
+                                 <li className="nav-item">
+                                   <Link className="nav-link" to="/profile">Profile</Link>
+                                 </li>
+                                 </ul>
+                               ) : (
+                                 <li className="nav-item">
+                                   <Link className="nav-link" to="/login">Login</Link>
+                                 </li>
+                               )}
                 </ul>
               </div>
             </div>

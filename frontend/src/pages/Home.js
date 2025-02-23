@@ -50,10 +50,17 @@ const Home = () => {
               <li className="nav-item">
                 <Link className="nav-link" to="/my-orders">Orders</Link>
               </li>
+
+              
               {user ? (
+                <ul className="navbar-nav ms-auto">
+                <li className="nav-item">
+                <Link className="nav-link" to="/carts">Cart</Link>
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/profile">Profile</Link>
                 </li>
+                </ul>
               ) : (
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">Login</Link>
@@ -103,7 +110,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="footer bg-dark text-light text-center p-3 mt-5">
-        <p>&copy; 2025 3D Clothing | All rights reserved.</p>
+        <p>&copy; 2025 ShopEase | All rights reserved.</p>
       </footer>
     </div>
   );

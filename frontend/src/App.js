@@ -25,7 +25,7 @@ function App() {
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/my-orders" element={<MyOrders/>}/>
+        <Route path="/my-orders" element={<MyOrders/>}/> 
 
 
 

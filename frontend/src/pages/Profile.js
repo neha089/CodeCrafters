@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Profile.css";
 
@@ -7,13 +7,12 @@ const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Retrieve the user object stored in localStorage (assumes it's stored as a JSON string)
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const userData = JSON.parse(storedUser);
-      // Use the stored token to fetch profile data from the backend
       axios
         .get("http://localhost:5000/api/users/profile", {
           headers: { Authorization: `Bearer ${userData.token}` },
@@ -31,6 +30,12 @@ const Profile = () => {
       setLoading(false);
     }
   }, []);
+
+  // Logout function
+  const onLogout = () => {
+    localStorage.removeItem("user"); // Remove user from localStorage
+    navigate("/login"); // Redirect to login page
+  };
 
   if (loading) return <p className="text-center mt-5">Loading...</p>;
   if (error) return <p className="text-center mt-5 error">{error}</p>;
@@ -57,16 +62,15 @@ const Profile = () => {
             <li className="list-group-item">
               <strong>Email:</strong> {profile.email}
             </li>
-           
           </ul>
         </div>
 
         <div className="text-center mt-4">
-          <Link to="/Login" className="btn btn-primary">
+          <button onClick={onLogout} className="btn btn-danger">
             Logout
-          </Link>
-          <br/>
-          <br/>
+          </button>
+          <br />
+          <br />
           <Link to="/" className="btn btn-primary">
             Back to Home
           </Link>
