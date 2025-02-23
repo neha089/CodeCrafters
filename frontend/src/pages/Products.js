@@ -156,7 +156,6 @@
 
 // export default Products;
 
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -218,26 +217,30 @@ const Products = () => {
   // Handle image file selection and perform image search
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-      setImageLoading(true);
-      setImageError("");
-      const formData = new FormData();
-      formData.append("image", file);
-      try {
-        const response = await axios.post(
-          "http://localhost:5001/api/v1/search-by-image",
-          formData,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
-        // Update products with results from image search
+    if (!file) return;
+    setSelectedFile(file);
+    setImageLoading(true);
+    setImageError("");
+    const formData = new FormData();
+    formData.append("image", file);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/search-by-image",
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      console.log("Image search response:", response.data);
+      // Update products with results from image search
+      if(response.data.products){
         setProducts(response.data.products);
-      } catch (err) {
-        console.error(err);
-        setImageError("Error performing image search");
-      } finally {
-        setImageLoading(false);
+      } else {
+        setImageError("No products returned from image search.");
       }
+    } catch (err) {
+      console.error(err);
+      setImageError("Error performing image search");
+    } finally {
+      setImageLoading(false);
     }
   };
 
@@ -280,11 +283,16 @@ const Products = () => {
     setVoiceLoading(true);
     setVoiceError("");
     try {
-      const response = await axios.get("http://localhost:5001/api/v1/search-by-voice", {
+      const response = await axios.get("http://localhost:5000/api/v1/search-by-voice", {
         params: { query: queryText },
       });
+      console.log("Voice search response:", response.data);
       // Update products with voice search results
-      setProducts(response.data.products);
+      if(response.data.products){
+        setProducts(response.data.products);
+      } else {
+        setVoiceError("No products returned from voice search.");
+      }
     } catch (err) {
       console.error(err);
       setVoiceError("Error performing voice search");
@@ -394,3 +402,4 @@ const Products = () => {
 };
 
 export default Products;
+
