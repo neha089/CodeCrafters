@@ -65,10 +65,13 @@ ShopEase is an innovative e-commerce platform that transforms the way users shop
 # 2d visulization 
 ![qq](./assets/image1.png)
 ![qqq](./assets/image2.png)
-![input](./assets/input.jpg)
+
+
+![input](./assets/input2.jpg)
 ![output](./assets/output.jpg)
  
- # will look like this 
+ # will look like this (for now remaining to combine and interate them all in Neural Network)
+
  ![outcome](./assets/image.png)
 
 ## Installation
@@ -97,7 +100,7 @@ JWT_SECRET=your_jwt_secret
 
 ## MODEL 
 
-# refer this repo 
+# refer this repo for Model  
 https://github.com/neha089/model
 
 
