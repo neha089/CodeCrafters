@@ -61,6 +61,16 @@ ShopEase is an innovative e-commerce platform that transforms the way users shop
 
 
 
+
+# 2d visulization 
+![qq](./assets/image1.png)
+![qqq](./assets/image2.png)
+![input](./assets/input.jpg)
+![output](./assets/output.jpg)
+ 
+ # will look like this 
+ ![outcome](./assets/image.png)
+
 ## Installation
 
 
@@ -84,3 +94,7 @@ ShopEase is an innovative e-commerce platform that transforms the way users shop
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
 JWT_SECRET=your_jwt_secret
+
+## MODEL 
+
+# refer this repo 
