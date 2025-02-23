@@ -71,9 +71,7 @@ ShopEase is an innovative e-commerce platform that transforms the way users shop
 ![output](./assets/output.jpg)
  
  # will look like this (for now remaining to combine and interate them all in Neural Network)
-
  ![outcome](./assets/image.png)
-
 ## Installation
 
 
