@@ -98,3 +98,6 @@ JWT_SECRET=your_jwt_secret
 ## MODEL 
 
 # refer this repo 
+https://github.com/neha089/model
+
+
