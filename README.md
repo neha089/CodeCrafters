@@ -1,5 +1,5 @@
 # CodeCrafters
-# ShopEase - 2D Clothing Visualization & Virtual Try-On
+# ShopEase - 2D 
 
 ShopEase is an innovative e-commerce platform that transforms the way users shop for clothes.  AI-powered search (by image ), personalized recommendations, and a 2D virtual try-on feature, ShopEase offers a truly immersive shopping experience.
 
